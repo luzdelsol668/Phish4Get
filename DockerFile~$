@@ -1,0 +1,38 @@
+# Dockerfile
+
+# Author       : talhazmedia
+# Github       : https://github.com/talhazmedia
+# Email        : mehmetalhaisk@gmail.com
+# Date         : 1-08-2022
+# Main Language: Python
+
+# Download and import main images
+
+# Operating system
+FROM Kali:latest
+# Main package
+FROM python:3
+
+# Author info
+LABEL MAINTAINER="https://github.com/talhazmedia/Phish4Get"
+
+# Working directory
+WORKDIR Phish4Get/
+# Add files 
+ADD . /Phish4Get
+
+# Installing other packages
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install php -y
+RUN pip3 install requests bs4
+RUN apt-get clean
+
+# Main command
+CMD ["python3", "phish4get.py", "--noupdate"]
+
+## Wanna run it own? Try following commnads:
+
+## "sudo docker build . -t talhazmedia/phisher4get:latest", "sudo docker run --rm -it talhazmedia/phish4get:latest"
+
+## "sudo docker pull talhazmedia/phish4get", "sudo docker run --rm -it talhazmedia/phish4get"
